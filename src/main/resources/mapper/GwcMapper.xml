@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.GwcMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Gwc" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cpid" property="cpid" jdbcType="VARCHAR" />
+    <result column="cpmc" property="cpmc" jdbcType="VARCHAR" />
+    <result column="sl" property="sl" jdbcType="INTEGER" />
+    <result column="jg" property="jg" jdbcType="VARCHAR" />
+    <result column="zj" property="zj" jdbcType="REAL" />
+    <result column="member" property="member" jdbcType="VARCHAR" />
+    <result column="ddbh" property="ddbh" jdbcType="VARCHAR" />
+    <result column="fl" property="fl" jdbcType="VARCHAR" />
+    <result column="sj" property="sj" jdbcType="VARCHAR" />
+    <result column="pf" property="pf" jdbcType="VARCHAR" />
+    <result column="pj" property="pj" jdbcType="VARCHAR" />
+    <result column="mpf" property="mpf" jdbcType="VARCHAR" />
+    <result column="mpj" property="mpj" jdbcType="VARCHAR" />
+    <result column="gys" property="gys" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cpid, cpmc, sl, jg, zj, member, ddbh, fl, sj, pf, pj, mpf, mpj, gys
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.GwcExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gwc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gwc
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gwc
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.GwcExample" >
+    delete from gwc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Gwc" >
+    insert into gwc (id, cpid, cpmc, 
+      sl, jg, zj, member, 
+      ddbh, fl, sj, pf, 
+      pj, mpf, mpj, gys
+      )
+    values (#{id,jdbcType=INTEGER}, #{cpid,jdbcType=VARCHAR}, #{cpmc,jdbcType=VARCHAR}, 
+      #{sl,jdbcType=INTEGER}, #{jg,jdbcType=VARCHAR}, #{zj,jdbcType=REAL}, #{member,jdbcType=VARCHAR}, 
+      #{ddbh,jdbcType=VARCHAR}, #{fl,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{pf,jdbcType=VARCHAR}, 
+      #{pj,jdbcType=VARCHAR}, #{mpf,jdbcType=VARCHAR}, #{mpj,jdbcType=VARCHAR}, #{gys,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Gwc" >
+    insert into gwc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cpid != null" >
+        cpid,
+      </if>
+      <if test="cpmc != null" >
+        cpmc,
+      </if>
+      <if test="sl != null" >
+        sl,
+      </if>
+      <if test="jg != null" >
+        jg,
+      </if>
+      <if test="zj != null" >
+        zj,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="ddbh != null" >
+        ddbh,
+      </if>
+      <if test="fl != null" >
+        fl,
+      </if>
+      <if test="sj != null" >
+        sj,
+      </if>
+      <if test="pf != null" >
+        pf,
+      </if>
+      <if test="pj != null" >
+        pj,
+      </if>
+      <if test="mpf != null" >
+        mpf,
+      </if>
+      <if test="mpj != null" >
+        mpj,
+      </if>
+      <if test="gys != null" >
+        gys,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cpid != null" >
+        #{cpid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpmc != null" >
+        #{cpmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="jg != null" >
+        #{jg,jdbcType=VARCHAR},
+      </if>
+      <if test="zj != null" >
+        #{zj,jdbcType=REAL},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbh != null" >
+        #{ddbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="pf != null" >
+        #{pf,jdbcType=VARCHAR},
+      </if>
+      <if test="pj != null" >
+        #{pj,jdbcType=VARCHAR},
+      </if>
+      <if test="mpf != null" >
+        #{mpf,jdbcType=VARCHAR},
+      </if>
+      <if test="mpj != null" >
+        #{mpj,jdbcType=VARCHAR},
+      </if>
+      <if test="gys != null" >
+        #{gys,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.GwcExample" resultType="java.lang.Integer" >
+    select count(*) from gwc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gwc
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cpid != null" >
+        cpid = #{record.cpid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpmc != null" >
+        cpmc = #{record.cpmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sl != null" >
+        sl = #{record.sl,jdbcType=INTEGER},
+      </if>
+      <if test="record.jg != null" >
+        jg = #{record.jg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zj != null" >
+        zj = #{record.zj,jdbcType=REAL},
+      </if>
+      <if test="record.member != null" >
+        member = #{record.member,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddbh != null" >
+        ddbh = #{record.ddbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fl != null" >
+        fl = #{record.fl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sj != null" >
+        sj = #{record.sj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pf != null" >
+        pf = #{record.pf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pj != null" >
+        pj = #{record.pj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpf != null" >
+        mpf = #{record.mpf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpj != null" >
+        mpj = #{record.mpj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gys != null" >
+        gys = #{record.gys,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gwc
+    set id = #{record.id,jdbcType=INTEGER},
+      cpid = #{record.cpid,jdbcType=VARCHAR},
+      cpmc = #{record.cpmc,jdbcType=VARCHAR},
+      sl = #{record.sl,jdbcType=INTEGER},
+      jg = #{record.jg,jdbcType=VARCHAR},
+      zj = #{record.zj,jdbcType=REAL},
+      member = #{record.member,jdbcType=VARCHAR},
+      ddbh = #{record.ddbh,jdbcType=VARCHAR},
+      fl = #{record.fl,jdbcType=VARCHAR},
+      sj = #{record.sj,jdbcType=VARCHAR},
+      pf = #{record.pf,jdbcType=VARCHAR},
+      pj = #{record.pj,jdbcType=VARCHAR},
+      mpf = #{record.mpf,jdbcType=VARCHAR},
+      mpj = #{record.mpj,jdbcType=VARCHAR},
+      gys = #{record.gys,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Gwc" >
+    update gwc
+    <set >
+      <if test="cpid != null" >
+        cpid = #{cpid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpmc != null" >
+        cpmc = #{cpmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        sl = #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="jg != null" >
+        jg = #{jg,jdbcType=VARCHAR},
+      </if>
+      <if test="zj != null" >
+        zj = #{zj,jdbcType=REAL},
+      </if>
+      <if test="member != null" >
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbh != null" >
+        ddbh = #{ddbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        fl = #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        sj = #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="pf != null" >
+        pf = #{pf,jdbcType=VARCHAR},
+      </if>
+      <if test="pj != null" >
+        pj = #{pj,jdbcType=VARCHAR},
+      </if>
+      <if test="mpf != null" >
+        mpf = #{mpf,jdbcType=VARCHAR},
+      </if>
+      <if test="mpj != null" >
+        mpj = #{mpj,jdbcType=VARCHAR},
+      </if>
+      <if test="gys != null" >
+        gys = #{gys,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Gwc" >
+    update gwc
+    set cpid = #{cpid,jdbcType=VARCHAR},
+      cpmc = #{cpmc,jdbcType=VARCHAR},
+      sl = #{sl,jdbcType=INTEGER},
+      jg = #{jg,jdbcType=VARCHAR},
+      zj = #{zj,jdbcType=REAL},
+      member = #{member,jdbcType=VARCHAR},
+      ddbh = #{ddbh,jdbcType=VARCHAR},
+      fl = #{fl,jdbcType=VARCHAR},
+      sj = #{sj,jdbcType=VARCHAR},
+      pf = #{pf,jdbcType=VARCHAR},
+      pj = #{pj,jdbcType=VARCHAR},
+      mpf = #{mpf,jdbcType=VARCHAR},
+      mpj = #{mpj,jdbcType=VARCHAR},
+      gys = #{gys,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getGwc" resultType="java.lang.String" parameterType="Gwc" >
+    SELECT id
+    FROM gwc
+    WHERE cpid = #{cpid} AND member=#{member} AND ddbh=#{ddbh}
+  </select>
+  <select id="getQueryData" resultType="com.pojo.Cp" parameterType="java.lang.String">
+    SELECT
+      *
+    FROM
+      cp
+    WHERE
+      id = #{id}
+  </select>
+
+  <select id="getKc" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    SELECT kc
+    FROM cp
+    WHERE id = #{id}
+  </select>
+
+  <update id="upDdbh" parameterType="com.pojo.Gwc" >
+    update gwc
+    set
+      ddbh = #{ddbh,jdbcType=VARCHAR}
+    WHERE member=#{member} AND ddbh=#{cpmc} AND gys=#{gys}
+  </update>
+
+  <update id="upPfpj" parameterType="com.pojo.Gwc" >
+    update gwc
+    set
+      pf = #{pf,jdbcType=VARCHAR},
+      pj = #{pj,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="hfPfpj" parameterType="com.pojo.Gwc" >
+    update gwc
+    set
+      mpf = #{mpf,jdbcType=VARCHAR},
+      mpj = #{mpj,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

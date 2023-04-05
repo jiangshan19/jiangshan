@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CpMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Cp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mc" property="mc" jdbcType="VARCHAR" />
+    <result column="fl" property="fl" jdbcType="VARCHAR" />
+    <result column="pp" property="pp" jdbcType="VARCHAR" />
+    <result column="cd" property="cd" jdbcType="VARCHAR" />
+    <result column="jg" property="jg" jdbcType="REAL" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="cf" property="cf" jdbcType="VARCHAR" />
+    <result column="sl" property="sl" jdbcType="INTEGER" />
+    <result column="tj" property="tj" jdbcType="VARCHAR" />
+    <result column="dj" property="dj" jdbcType="INTEGER" />
+    <result column="xl" property="xl" jdbcType="INTEGER" />
+    <result column="kc" property="kc" jdbcType="INTEGER" />
+    <result column="sxj" property="sxj" jdbcType="VARCHAR" />
+    <result column="member" property="member" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pojo.Cp" extends="BaseResultMap" >
+    <result column="nr" property="nr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mc, fl, pp, cd, jg, url, cf, sl, tj, dj, xl, kc, sxj, member
+  </sql>
+  <sql id="Blob_Column_List" >
+    nr
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pojo.CpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.CpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.CpExample" >
+    delete from cp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Cp" >
+    insert into cp (id, mc, fl, pp, 
+      cd, jg, url, cf, 
+      sl, tj, dj, xl, 
+      kc, sxj, member, nr
+      )
+    values (#{id,jdbcType=INTEGER}, #{mc,jdbcType=VARCHAR}, #{fl,jdbcType=VARCHAR}, #{pp,jdbcType=VARCHAR}, 
+      #{cd,jdbcType=VARCHAR}, #{jg,jdbcType=REAL}, #{url,jdbcType=VARCHAR}, #{cf,jdbcType=VARCHAR}, 
+      #{sl,jdbcType=INTEGER}, #{tj,jdbcType=VARCHAR}, #{dj,jdbcType=INTEGER}, #{xl,jdbcType=INTEGER}, 
+      #{kc,jdbcType=INTEGER}, #{sxj,jdbcType=VARCHAR}, #{member,jdbcType=VARCHAR}, #{nr,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Cp" >
+    insert into cp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mc != null" >
+        mc,
+      </if>
+      <if test="fl != null" >
+        fl,
+      </if>
+      <if test="pp != null" >
+        pp,
+      </if>
+      <if test="cd != null" >
+        cd,
+      </if>
+      <if test="jg != null" >
+        jg,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="cf != null" >
+        cf,
+      </if>
+      <if test="sl != null" >
+        sl,
+      </if>
+      <if test="tj != null" >
+        tj,
+      </if>
+      <if test="dj != null" >
+        dj,
+      </if>
+      <if test="xl != null" >
+        xl,
+      </if>
+      <if test="kc != null" >
+        kc,
+      </if>
+      <if test="sxj != null" >
+        sxj,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="nr != null" >
+        nr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="pp != null" >
+        #{pp,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null" >
+        #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="jg != null" >
+        #{jg,jdbcType=REAL},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="cf != null" >
+        #{cf,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="tj != null" >
+        #{tj,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        #{dj,jdbcType=INTEGER},
+      </if>
+      <if test="xl != null" >
+        #{xl,jdbcType=INTEGER},
+      </if>
+      <if test="kc != null" >
+        #{kc,jdbcType=INTEGER},
+      </if>
+      <if test="sxj != null" >
+        #{sxj,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        #{nr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.CpExample" resultType="java.lang.Integer" >
+    select count(*) from cp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mc != null" >
+        mc = #{record.mc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fl != null" >
+        fl = #{record.fl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pp != null" >
+        pp = #{record.pp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cd != null" >
+        cd = #{record.cd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jg != null" >
+        jg = #{record.jg,jdbcType=REAL},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cf != null" >
+        cf = #{record.cf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sl != null" >
+        sl = #{record.sl,jdbcType=INTEGER},
+      </if>
+      <if test="record.tj != null" >
+        tj = #{record.tj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dj != null" >
+        dj = #{record.dj,jdbcType=INTEGER},
+      </if>
+      <if test="record.xl != null" >
+        xl = #{record.xl,jdbcType=INTEGER},
+      </if>
+      <if test="record.kc != null" >
+        kc = #{record.kc,jdbcType=INTEGER},
+      </if>
+      <if test="record.sxj != null" >
+        sxj = #{record.sxj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.member != null" >
+        member = #{record.member,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nr != null" >
+        nr = #{record.nr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cp
+    set id = #{record.id,jdbcType=INTEGER},
+      mc = #{record.mc,jdbcType=VARCHAR},
+      fl = #{record.fl,jdbcType=VARCHAR},
+      pp = #{record.pp,jdbcType=VARCHAR},
+      cd = #{record.cd,jdbcType=VARCHAR},
+      jg = #{record.jg,jdbcType=REAL},
+      url = #{record.url,jdbcType=VARCHAR},
+      cf = #{record.cf,jdbcType=VARCHAR},
+      sl = #{record.sl,jdbcType=INTEGER},
+      tj = #{record.tj,jdbcType=VARCHAR},
+      dj = #{record.dj,jdbcType=INTEGER},
+      xl = #{record.xl,jdbcType=INTEGER},
+      kc = #{record.kc,jdbcType=INTEGER},
+      sxj = #{record.sxj,jdbcType=VARCHAR},
+      member = #{record.member,jdbcType=VARCHAR},
+      nr = #{record.nr,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp
+    set id = #{record.id,jdbcType=INTEGER},
+      mc = #{record.mc,jdbcType=VARCHAR},
+      fl = #{record.fl,jdbcType=VARCHAR},
+      pp = #{record.pp,jdbcType=VARCHAR},
+      cd = #{record.cd,jdbcType=VARCHAR},
+      jg = #{record.jg,jdbcType=REAL},
+      url = #{record.url,jdbcType=VARCHAR},
+      cf = #{record.cf,jdbcType=VARCHAR},
+      sl = #{record.sl,jdbcType=INTEGER},
+      tj = #{record.tj,jdbcType=VARCHAR},
+      dj = #{record.dj,jdbcType=INTEGER},
+      xl = #{record.xl,jdbcType=INTEGER},
+      kc = #{record.kc,jdbcType=INTEGER},
+      sxj = #{record.sxj,jdbcType=VARCHAR},
+      member = #{record.member,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Cp" >
+    update cp
+    <set >
+      <if test="mc != null" >
+        mc = #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        fl = #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="pp != null" >
+        pp = #{pp,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null" >
+        cd = #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="jg != null" >
+        jg = #{jg,jdbcType=REAL},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="cf != null" >
+        cf = #{cf,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        sl = #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="tj != null" >
+        tj = #{tj,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        dj = #{dj,jdbcType=INTEGER},
+      </if>
+      <if test="xl != null" >
+        xl = #{xl,jdbcType=INTEGER},
+      </if>
+      <if test="kc != null" >
+        kc = #{kc,jdbcType=INTEGER},
+      </if>
+      <if test="sxj != null" >
+        sxj = #{sxj,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        nr = #{nr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pojo.Cp" >
+    update cp
+    set mc = #{mc,jdbcType=VARCHAR},
+      fl = #{fl,jdbcType=VARCHAR},
+      pp = #{pp,jdbcType=VARCHAR},
+      cd = #{cd,jdbcType=VARCHAR},
+      jg = #{jg,jdbcType=REAL},
+      url = #{url,jdbcType=VARCHAR},
+      cf = #{cf,jdbcType=VARCHAR},
+      sl = #{sl,jdbcType=INTEGER},
+      tj = #{tj,jdbcType=VARCHAR},
+      dj = #{dj,jdbcType=INTEGER},
+      xl = #{xl,jdbcType=INTEGER},
+      kc = #{kc,jdbcType=INTEGER},
+      sxj = #{sxj,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR},
+      nr = #{nr,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Cp" >
+    update cp
+    set mc = #{mc,jdbcType=VARCHAR},
+      fl = #{fl,jdbcType=VARCHAR},
+      pp = #{pp,jdbcType=VARCHAR},
+      cd = #{cd,jdbcType=VARCHAR},
+      jg = #{jg,jdbcType=REAL},
+      url = #{url,jdbcType=VARCHAR},
+      cf = #{cf,jdbcType=VARCHAR},
+      sl = #{sl,jdbcType=INTEGER},
+      tj = #{tj,jdbcType=VARCHAR},
+      dj = #{dj,jdbcType=INTEGER},
+      xl = #{xl,jdbcType=INTEGER},
+      kc = #{kc,jdbcType=INTEGER},
+      sxj = #{sxj,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

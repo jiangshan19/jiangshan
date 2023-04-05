@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.PlMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Pl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fxid" property="fxid" jdbcType="VARCHAR" />
+    <result column="bt" property="bt" jdbcType="VARCHAR" />
+    <result column="nr" property="nr" jdbcType="VARCHAR" />
+    <result column="member" property="member" jdbcType="VARCHAR" />
+    <result column="sj" property="sj" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fxid, bt, nr, member, sj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Pl" >
+    insert into pl (id, fxid, bt, 
+      nr, member, sj)
+    values (#{id,jdbcType=INTEGER}, #{fxid,jdbcType=VARCHAR}, #{bt,jdbcType=VARCHAR}, 
+      #{nr,jdbcType=VARCHAR}, #{member,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Pl" >
+    insert into pl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fxid != null" >
+        fxid,
+      </if>
+      <if test="bt != null" >
+        bt,
+      </if>
+      <if test="nr != null" >
+        nr,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="sj != null" >
+        sj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fxid != null" >
+        #{fxid,jdbcType=VARCHAR},
+      </if>
+      <if test="bt != null" >
+        #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        #{nr,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Pl" >
+    update pl
+    <set >
+      <if test="fxid != null" >
+        fxid = #{fxid,jdbcType=VARCHAR},
+      </if>
+      <if test="bt != null" >
+        bt = #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        nr = #{nr,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        sj = #{sj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Pl" >
+    update pl
+    set fxid = #{fxid,jdbcType=VARCHAR},
+      bt = #{bt,jdbcType=VARCHAR},
+      nr = #{nr,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR},
+      sj = #{sj,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
